@@ -1,0 +1,52 @@
+---
+- name: Initial EC2 Instance Setup
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Docker
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add 'ubuntu' user to docker group
+      ansible.builtin.user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Install Docker SDK for Python (python3-docker) via apt
+      ansible.builtin.apt:
+        name: python3-docker
+        state: present
+
+    - name: Install jsondiff Python library
+      ansible.builtin.apt:
+        name: python3-jsondiff
+        state: present
+
+    - name: Install NGINX
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Start NGINX service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Install Git
+      ansible.builtin.apt:
+        name: git
+        state: present

@@ -1,0 +1,14 @@
+---
+- name: Initialize Docker Swarm
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Initialize Docker Swarm if not already initialized
+      community.docker.docker_swarm:
+        state: present
+      register: swarm_init_result
+
+    - name: Display swarm init results (for debugging)
+      ansible.builtin.debug:
+        var: swarm_init_result

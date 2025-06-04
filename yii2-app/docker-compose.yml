@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  yii2-app:
+    image: avinashdocker2025/yii2-app:latest # IMPORTANT: Use YOUR Docker Hub username here
+    ports:
+      - "8080:80" # Map host port 8080 to container port 80 for internal access
+    deploy:
+      replicas: 1 # Number of instances of your app to run
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: overlay
