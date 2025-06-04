@@ -20,9 +20,8 @@ devops-assignment/
 │   └── web/
 │       └── index.php
 └── .github/
-└── workflows/
-└── deploy.yml
-
+    └── workflows/
+        └── deploy.yml
 
 ## Setup Instructions
 
