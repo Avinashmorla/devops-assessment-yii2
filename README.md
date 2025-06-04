@@ -16,23 +16,23 @@ The entire stack runs on an **AWS EC2 instance**, making it a real-world DevOps 
 
 ```bash
 devops-assignment/
-├── ansible/                   # Ansible playbooks and configs
-│   ├── configure_nginx.yml    # Sets up NGINX reverse proxy
-│   ├── deploy_app.yml         # Deploys the Yii2 Docker stack
-│   ├── init_swarm.yml         # Initializes Docker Swarm
-│   ├── inventory              # Ansible hosts inventory
-│   ├── mykeypair.pem          # 🔒 EC2 SSH key (DO NOT push to public repos)
-│   ├── nginx_app.conf         # NGINX virtual host config
-│   └── setup_instance.yml     # Installs Docker, Git, etc.
-├── yii2-app/                  # Yii2 application source
-│   ├── Dockerfile             # Dockerfile for Yii2 app
-│   ├── composer.json          # PHP dependencies
-│   ├── docker-compose.yml     # Compose file for local/dev setup
+├── ansible/                   
+│   ├── configure_nginx.yml    
+│   ├── deploy_app.yml         
+│   ├── init_swarm.yml         
+│   ├── inventory              
+│   ├── mykeypair.pem          
+│   ├── nginx_app.conf        
+│   └── setup_instance.yml     
+├── yii2-app/                  
+│   ├── Dockerfile             
+│   ├── composer.json          
+│   ├── docker-compose.yml     
 │   └── web/
-│       └── index.php          # Entry point for Yii2 app
+│       └── index.php          
 └── .github/
     └── workflows/
-        └── deploy.yml         # GitHub Actions CI/CD pipeline
+        └── deploy.yml         
 ```
 
 
