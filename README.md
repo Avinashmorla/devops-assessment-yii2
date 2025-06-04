@@ -11,7 +11,6 @@ This project demonstrates the deployment of a PHP-based Yii2 application using:
 
 The entire stack runs on an **AWS EC2 instance**, making it a real-world DevOps deployment scenario.
 
----
 
 ## 🗂️ Project Structure
 
@@ -36,7 +35,6 @@ devops-assignment/
         └── deploy.yml         # GitHub Actions CI/CD pipeline
 ```
 
----
 
 ## ⚙️ Prerequisites
 
@@ -49,7 +47,6 @@ devops-assignment/
   - Git
   - SSH client
 
----
 
 ## ☁️ 1. EC2 Instance Setup (Manual - Initial Only)
 
@@ -66,9 +63,7 @@ devops-assignment/
      ```
 
 3. **Update Inventory File:**
-   - Edit `ansible/inventory` with your EC2 Public IP
-
----
+   - Edit `ansible/inventory` with your EC2 Public I
 
 ## 🔧 2. Infrastructure Setup with Ansible
 
@@ -90,7 +85,6 @@ ansible-playbook -i inventory configure_nginx.yml
 ansible-playbook -i inventory deploy_app.yml
 ```
 
----
 
 ## 🔗 3. GitHub Repository Setup
 
@@ -106,7 +100,6 @@ git remote add origin https://github.com/YOUR_USERNAME/devops-assessment-yii2.gi
 git push -u origin main
 ```
 
----
 
 ## 🔐 4. Configure GitHub Secrets (CI/CD)
 
@@ -132,8 +125,6 @@ ssh-keygen -t rsa -b 4096 -C "github-actions-deploy-key" -f ~/.ssh/github_action
   echo "PASTE_PUBLIC_KEY" >> ~/.ssh/authorized_keys
   ```
 
----
-
 ## ⚙️ 5. Set Up GitHub Actions Workflow
 
 1. Create workflow file:
@@ -152,8 +143,6 @@ ssh-keygen -t rsa -b 4096 -C "github-actions-deploy-key" -f ~/.ssh/github_action
    ```
 
 This triggers the first pipeline run automatically.
-
----
 
 ## 🧪 How to Test
 
@@ -180,7 +169,7 @@ This triggers the first pipeline run automatically.
 4. Refresh browser: `http://<your-ec2-ip>`  
    Output should reflect the updated message.
 
----
+
 
 ## 🧾 Assumptions
 
