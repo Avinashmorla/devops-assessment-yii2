@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Trigger this workflow on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner hosted by GitHub
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Action to checkout your repository code
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3 # Action to log into Docker Hub
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5 # Action to build and push Docker images
+        with:
+          context: ./yii2-app # Path to your Dockerfile (relative to repo root)
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/yii2-app:latest # Tag the image with your Docker Hub username and latest
+
+      - name: Deploy to EC2 with SSH
+        uses: appleboy/ssh-action@v1.0.0 # Action to execute commands over SSH
+        with:
+          host: 13.234.75.81 # Your EC2 instance's public IP
+          username: ubuntu # The default user for Ubuntu EC2 instances
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # The SSH private key from GitHub Secrets
+          script: |
+            # Ensure docker is logged in (optional, but good for robust pipelines)
+            docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+            # Pull the latest image
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/yii2-app:latest
+
+            # Update the Docker Swarm service
+            # Force update ensures the service restarts with the new image, even if tag is 'latest'
+            docker service update --image ${{ secrets.DOCKER_HUB_USERNAME }}/yii2-app:latest --force yii2-app-stack_yii2-app
