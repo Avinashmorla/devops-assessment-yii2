@@ -1,2 +1,4 @@
 [web]
-52.66.82.167 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/cloudshell_key
+52.66.82.167 ansible_user=ubuntu ansible_ssh_private_key_file=./my-yii2-key.pem
+
+
