@@ -1,4 +1,4 @@
-# 🚀 DevOps Assessment: Yii2 + Docker Swarm + Ansible + GitHub Actions
+# 🚀 End-to-End CI/CD Pipeline for Yii2 using Docker, Ansible & GitHub Action
 
 ## 📌 Objective
 
